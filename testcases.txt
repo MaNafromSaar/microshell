@@ -1,0 +1,15 @@
+./amicroshell/bin/echo "Hello World" "|" /usr/bin/wc -w
+./microshell /bin/echo "Hello World" "|" /usr/bin/tr ' ' '\n' "|" /usr/bin/wc -l
+./microshell /bin/ls -la "|" /bin/grep "micro" "|" /usr/bin/wc -l
+
+./microshell /bin/echo "First command" ";" /bin/echo "Second command" "|" /bin/cat ";" /bin/echo "Third"
+
+./microshell /bin/echo "abcdefghijklmnopqrstuvwxyz" "|" /usr/bin/tr 'a-z' 'A-Z' "|" /usr/bin/tr -d 'AEIOU' "|" /usr/bin/tr ' ' '\n' "|" /bin/cat "|" /bin/cat "|" /bin/grep "." "|" /bin/cat "|" /bin/cat "|" /bin/sed 's/^/letter: /' "|" /bin/cat
+
+./microshell /bin/echo "Testing pipes" "|" /bin/cat "|" /bin/sed 's/Testing/Many/' "|" /bin/cat "|" /usr/bin/tr 'a-z' 'A-Z' "|" /bin/cat "|" /usr/bin/tr 'A-Z' 'a-z' "|" /bin/cat "|" /bin/cat "|" /bin/grep "many" "|" /bin/cat "|" /bin/cat "|" /bin/sed 's/many/multiple/' "|" /bin/cat "|" /bin/cat "|" /bin/cat "|" /bin/sed 's/$/!/' "|" /bin/cat "|" /bin/cat "|" /bin/cat "|" /bin/cat "|" /bin/cat
+
+./microshell /bin/echo "Testing thirty pipes" "|" /bin/cat "|" /bin/cat "|" /bin/cat "|" /bin/cat "|" /bin/cat "|" /bin/cat "|" /bin/cat "|" /bin/cat "|" /bin/cat "|" /bin/cat "|" /bin/cat "|" /bin/cat "|" /bin/cat "|" /bin/cat "|" /bin/cat "|" /bin/cat "|" /bin/cat "|" /bin/cat "|" /bin/cat "|" /bin/cat "|" /bin/cat "|" /bin/cat "|" /bin/cat "|" /bin/cat "|" /bin/cat "|" /bin/cat "|" /bin/cat "|" /bin/cat "|" /bin/grep "thirty"
+
+./microshell cd .. "|" /bin/pwd
+
+./microshell "cd" ".." "|" "/bin/pwd"

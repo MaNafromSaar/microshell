@@ -1,0 +1,44 @@
+Microshell Implementation Explanation
+This code implements a simple shell that can execute commands, handle pipes (|), process command separators (;), and support the built-in cd command. Let me break down each component:
+
+1. Error Handling Function
+
+void prerr(char *str)
+
+This function prints error messages to stderr (file descriptor 2), writing one character at a time until it reaches the null terminator.
+
+2. Built-in CD Command
+
+void cd(int argc, char **argv)
+
+Verifies it has exactly one argument (the directory path)
+Changes directory with chdir()
+Handles and reports errors
+
+3. Pipe Configuration
+
+Is done within the runcmd function.
+Takes the pipe file descriptors, a flag indicating if piping is needed, and which end to set
+Uses dup2() to redirect standard input/output
+Closes pipe file descriptors after setting up redirection
+
+4. Command Execution
+
+The intended behavior is:
+
+Handle built-in cd command internally
+For other commands:
+Create pipe if needed
+Fork a child process
+In child: set up stdout redirection if piped, execute command
+In parent: wait for child, set up stdin redirection for next command
+
+5. Main Command Loop
+
+This processes commands from the arguments:
+
+Tracks the start position of each command
+Advances until a semicolon, pipe, or end of arguments
+Sets the pipe flag if appropriate
+Null-terminates the command arguments list
+Executes the command
