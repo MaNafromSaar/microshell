@@ -56,6 +56,7 @@ The command is executed using execve.
 In the parent process:
 The parent waits for the child process to finish using waitpid.
 The standard input is redirected to the read end of the pipe for the next command.
+
 Example Walkthrough
 
 Input: ./microshell /bin/ls "|" /usr/bin/grep microshell ";" /bin/echo i love my microshell
@@ -72,6 +73,7 @@ stdout is redirected to the pipe.
 In the parent process:
 The parent waits for /bin/ls to finish.
 stdin is redirected to the pipe for the next command.
+
 Second Command (/usr/bin/grep microshell ;):
 
 runcmd is called with argv = ["/usr/bin/grep", "microshell"] and has_pipe = 0.
@@ -81,6 +83,7 @@ stdin is already redirected to the pipe from the previous command.
 /usr/bin/grep microshell is executed using execve.
 In the parent process:
 The parent waits for /usr/bin/grep to finish.
+
 Third Command (/bin/echo i love my microshell):
 
 runcmd is called with argv = ["/bin/echo", "i", "love", "my", "microshell"] and has_pipe = 0.
